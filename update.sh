@@ -32,6 +32,6 @@ if git diff --cached --quiet; then echo "   no public changes"; else git "${id[@
 
 echo "4/4 Private source repo"
 S=(--git-dir=.git-src --work-tree=.)
-git "${S[@]}" add -f src/data/dashboard.json src/template.html src/compute_views.py src/youtube_views.py build.sh update.sh README.md .gitignore
+git "${S[@]}" add -f src/data/dashboard.json src/template.html src/compute_views.py src/youtube_views.py src/ad_creatives.py src/data/ad_creatives_exclude.json src/data/meta_raw build.sh update.sh README.md .gitignore
 if git "${S[@]}" diff --cached --quiet; then echo "   no source changes"; else git "${S[@]}" "${id[@]}" commit -qm "$MSG" && git "${S[@]}" -c credential.https://github.com.helper= -c "credential.https://github.com.helper=!$GH auth git-credential" push origin main && echo "   pushed $(git "${S[@]}" rev-parse --short HEAD)"; fi
 echo "Done."
