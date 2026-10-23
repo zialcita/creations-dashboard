@@ -11,9 +11,13 @@ The editable source is deliberately **not committed** (it would be public). It l
 - Layout: `/workspace/creations-dashboard/src/template.html`
 - Passcode: `/workspace/.secrets/creations-dashboard-passcode.txt`
 
+Source is backed up in the PRIVATE repo zialcita/creations-dashboard-src (git dir `.git-src` in the same folder).
+
 Steps:
 1. Edit `src/data/dashboard.json` (keep valid JSON; `progress` is a 0–100 bar value).
-2. Run `./build.sh` — inlines the JSON and re-encrypts into `index.html`.
-3. Commit and push `index.html`; GitHub Pages updates in ~1 minute.
+2. Run `./update.sh "what changed"` — validates the JSON, re-encrypts `index.html`, pushes it here (only if changed), and pushes the source to the private repo. Stops on any error; never force-pushes.
+3. GitHub Pages updates in ~1 minute.
+
+`./build.sh` alone just rebuilds/encrypts locally (passcode read from the secrets file at build time).
 
 Brand: creationsmedspa.com colors (#128599 teal, #9AB53B green, #EDECE6 cream, #BA9C78 gold), fonts Raleway + Sorts Mill Goudy, logo from the live site.

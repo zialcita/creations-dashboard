@@ -1,3 +1,7 @@
-src/
 .staticrypt.json
 node_modules/
+.git-src/
+src/build.html
+*.pem
+.env*
+.last-build.hash
