@@ -10,6 +10,7 @@ id=(-c user.name=zialcita -c user.email=zialcita@users.noreply.github.com)
 MSG=${1:-"Dashboard update $(date '+%Y-%m-%d %H:%M %Z')"}
 
 echo "0/4 Recomputing views totals"
+python3 src/youtube_views.py || echo "YouTube pull failed; keeping previous values"
 python3 src/compute_views.py
 echo "1/4 Validating src/data/dashboard.json"
 python3 -m json.tool src/data/dashboard.json >/dev/null || { echo "ERROR: dashboard.json is not valid JSON"; exit 1; }
@@ -31,6 +32,6 @@ if git diff --cached --quiet; then echo "   no public changes"; else git "${id[@
 
 echo "4/4 Private source repo"
 S=(--git-dir=.git-src --work-tree=.)
-git "${S[@]}" add -f src/data/dashboard.json src/template.html src/compute_views.py build.sh update.sh README.md .gitignore
+git "${S[@]}" add -f src/data/dashboard.json src/template.html src/compute_views.py src/youtube_views.py build.sh update.sh README.md .gitignore
 if git "${S[@]}" diff --cached --quiet; then echo "   no source changes"; else git "${S[@]}" "${id[@]}" commit -qm "$MSG" && git "${S[@]}" -c credential.https://github.com.helper= -c "credential.https://github.com.helper=!$GH auth git-credential" push origin main && echo "   pushed $(git "${S[@]}" rev-parse --short HEAD)"; fi
 echo "Done."

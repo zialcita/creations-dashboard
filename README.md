@@ -24,3 +24,5 @@ Brand: creationsmedspa.com colors (#128599 teal, #9AB53B green, #EDECE6 cream, #
 
 ## Views and engagement (Thursday refresh)
 Edit `viewsByMonth.months[]` in dashboard.json: per-platform `platforms` (null = pending) from GHL Social Planner > Statistics impressions and Ryze `google_business_profile__getPerformance` (sum of the 4 BUSINESS_IMPRESSIONS_* metrics), plus `engagement` (likes + comments + shares). Roll the oldest month off. `./update.sh` runs `src/compute_views.py` to rebuild totals, charts and the table.
+
+YouTube row: `src/youtube_views.py` (yt-dlp, public, no sign-in) runs automatically in `./update.sh` before `compute_views.py`. Requires `pip install yt-dlp`. If the pull fails, previous values stay.
