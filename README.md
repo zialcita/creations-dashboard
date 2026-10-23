@@ -21,3 +21,6 @@ Steps:
 `./build.sh` alone just rebuilds/encrypts locally (passcode read from the secrets file at build time).
 
 Brand: creationsmedspa.com colors (#128599 teal, #9AB53B green, #EDECE6 cream, #BA9C78 gold), fonts Raleway + Sorts Mill Goudy, logo from the live site.
+
+## Views and engagement (Thursday refresh)
+Edit `viewsByMonth.months[]` in dashboard.json: per-platform `platforms` (null = pending) from GHL Social Planner > Statistics impressions and Ryze `google_business_profile__getPerformance` (sum of the 4 BUSINESS_IMPRESSIONS_* metrics), plus `engagement` (likes + comments + shares). Roll the oldest month off. `./update.sh` runs `src/compute_views.py` to rebuild totals, charts and the table.
