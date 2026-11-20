@@ -28,7 +28,7 @@ Edit `viewsByMonth.months[]` in dashboard.json: per-platform `platforms` (null =
 YouTube row: `src/youtube_views.py` (yt-dlp, public, no sign-in) runs automatically in `./update.sh` before `compute_views.py`. Requires `pip install yt-dlp`. If the pull fails, previous values stay.
 
 ## Top ad creatives (Thursday refresh, BEFORE `./update.sh`)
-Shows one card per Meta ad (thumbnail, name, status, spend, impressions, CTR, leads, CPL, "View ad" link) for the Creations Med Spa Ad Account `act_4526830877645470`: active ads plus any ad with spend in the period. GLP-1 / "DO NOT RELAUNCH" ads are always skipped.
+Shows one card per Meta ad (thumbnail, name, status, spend, impressions, CTR, leads, CPL, "View ad" link) for the Creations Med Spa Ad Account `act_4526830877645470`: **only ads whose live Meta `effective_status` is ACTIVE**. Paused and ended ads are left off this list (month-to-date spend totals still include them). GLP-1 / "DO NOT RELAUNCH" ads are always skipped.
 
 1. In Ryze, run `meta_ads__runGraphRead` (adAccountId `act_4526830877645470`) twice and save each raw JSON response over the files in `src/data/meta_raw/` (the exact path + fields are in the header of `src/ad_creatives.py`):
    - `ads.json`: path `act_4526830877645470/ads?limit=100`
